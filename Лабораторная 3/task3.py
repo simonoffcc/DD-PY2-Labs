@@ -64,7 +64,7 @@ class AudioBook(Book):
     @staticmethod
     def duration_check(value) -> bool:
         """Метод валидации значения продолжительности аудиокниги"""
-        if not isinstance(value, int | float):
+        if not isinstance(value, (int, float)):
             raise TypeError("Продолжительность аудиокниги должна быть целым или дробным числом.")
         if value <= 0:
             raise ValueError("Продолжительность аудиокниги должна быть положительным числом.")
