@@ -46,11 +46,9 @@ class Library:
 
     def get_next_book_id(self) -> int:
         """Метод, возвращающий идентификатор для добавления новой книги в библиотеку"""
-        len_books = len(self.books)
-        if len_books > 0:
-            return len_books + 1
-        else:
+        if not self.books:
             return 1
+        return self.books[-1].get_id() + 1
 
     def get_index_by_book_id(self, book_id: int) -> int:
         """Метод, возвращающий индекс книги в списке, который хранится в атрибуте экземпляра класса"""
