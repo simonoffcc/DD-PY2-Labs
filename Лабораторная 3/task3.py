@@ -26,15 +26,11 @@ class PaperBook(Book):
         if self.pages_check(pages):
             self._pages = pages
 
-    def __str__(self):
-        parent_string = super().__str__()
-        return f"{parent_string} Кол-во страниц: {self.pages}."
-
     def __repr__(self):
         return f"{self.__class__.__name__}(name={self._name!r}, author={self._author!r}, pages={self.pages})"
 
     @staticmethod
-    def pages_check(value) -> bool:
+    def pages_check(value: int) -> bool:
         """Метод валидации значения кол-ва страниц книги"""
         if not isinstance(value, int):
             raise TypeError("Количество страниц книги должно быть целым числом.")
@@ -46,6 +42,10 @@ class PaperBook(Book):
     def pages(self) -> int:
         return self._pages
 
+    @pages.setter
+    def pages(self, value: int) -> None:
+        self._pages = self.pages_check(value)
+
 
 class AudioBook(Book):
     """ Аудиокнига. """
@@ -54,15 +54,11 @@ class AudioBook(Book):
         if self.duration_check(duration):
             self._duration = duration
 
-    def __str__(self):
-        parent_string = super().__str__()
-        return f"{parent_string} Продолжительность: {self.duration}."
-
     def __repr__(self):
         return f"{self.__class__.__name__}(name={self._name!r}, author={self._author!r}, duration={self.duration})"
 
     @staticmethod
-    def duration_check(value) -> bool:
+    def duration_check(value: int) -> bool:
         """Метод валидации значения продолжительности аудиокниги"""
         if not isinstance(value, (int, float)):
             raise TypeError("Продолжительность аудиокниги должна быть целым или дробным числом.")
@@ -73,6 +69,10 @@ class AudioBook(Book):
     @property
     def duration(self) -> int | float:
         return self._duration
+
+    @duration.setter
+    def duration(self, value: int) -> None:
+        self._duration = self.duration_check(value)
 
 
 if __name__ == '__main__':
